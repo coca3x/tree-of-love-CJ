@@ -86,9 +86,15 @@ body {
   max-height: 90vh;
   overflow: visible;
   padding: 1em 1.5em 1em 1em;
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.6);
+  /* Changed to more transparent */
+  backdrop-filter: blur(2px);
+  /* Added subtle blur for readability */
+  -webkit-backdrop-filter: blur(2px);
+  /* For Safari support */
   border-radius: 0.7em;
-  box-shadow: 0 2px 16px #e6002611;
+  box-shadow: 0 2px 12px rgba(230, 0, 38, 0.08);
+  /* Adjusted shadow */
   /* Permite que la caja crezca en altura y ancho */
   transition: max-width 0.4s, min-width 0.4s, width 0.4s;
 }

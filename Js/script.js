@@ -1,5 +1,24 @@
 //© EduardoX - Código libre no comercial
 
+// Inicializar y cargar la música de fondo lo antes posible
+document.addEventListener('DOMContentLoaded', () => {
+  // Intentar reproducir música inmediatamente
+  initBackgroundMusic();
+});
+
+// Función de inicialización de música con prioridad
+function initBackgroundMusic() {
+  const audio = document.getElementById('bg-music');
+  if (!audio) return;
+
+  // Configurar audio para carga prioritaria
+  audio.preload = 'auto';
+  audio.volume = 1.0;  // Valor máximo permitido (el rango válido es de 0.0 a 1.0)
+  audio.loop = true;
+
+  // Intentar reproducir inmediatamente
+  playBackgroundMusic();
+}
 
 // Cargar el SVG y animar los corazones
 fetch('Img/treelove.svg')
@@ -45,7 +64,7 @@ fetch('Img/treelove.svg')
           startFloatingObjects();
           // Mostrar cuenta regresiva
           showCountdown();
-          // Iniciar música de fondo
+          // Asegurarse que la música siga reproduciéndose
           playBackgroundMusic();
         }, 1200); //Tiempo para agrandar el SVG
       }, totalDuration);
@@ -105,8 +124,6 @@ function showSignature() {
   signature.textContent = firma ? decodeURIComponent(firma) : "Con amor, Eduardo Xuyá";
   signature.classList.add('visible');
 }
-
-
 
 // Controlador de objetos flotantes
 function startFloatingObjects() {
@@ -173,6 +190,7 @@ function showCountdown() {
 function playBackgroundMusic() {
   const audio = document.getElementById('bg-music');
   if (!audio) return;
+
   let btn = document.getElementById('music-btn');
   if (!btn) {
     btn = document.createElement('button');
@@ -190,27 +208,35 @@ function playBackgroundMusic() {
     btn.style.cursor = 'pointer';
     document.body.appendChild(btn);
   }
-  audio.volume = 0.7;
-  audio.loop = true;
-  // Intentar reproducir inmediatamente
-  audio.play().then(() => {
-    btn.textContent = '🔊 Música';
-  }).catch(() => {
-    // Si falla el autoplay, esperar click en el botón
-    btn.textContent = '▶️ Música';
-  });
-  btn.onclick = () => {
+
+  // Try to play audio with more user gestures
+  const attemptPlay = () => {
+    audio.play().then(() => {
+      btn.textContent = '🔊 Música';
+      document.removeEventListener('click', attemptPlay);
+      document.removeEventListener('touchstart', attemptPlay);
+      document.removeEventListener('keydown', attemptPlay);
+    }).catch(() => {
+      btn.textContent = '▶️ Música';
+    });
+  };
+
+  // Try to autoplay immediately
+  attemptPlay();
+
+  // Also listen for any user interaction to start playback
+  document.addEventListener('click', attemptPlay, { once: true });
+  document.addEventListener('touchstart', attemptPlay, { once: true });
+  document.addEventListener('keydown', attemptPlay, { once: true });
+
+  btn.onclick = (e) => {
+    e.stopPropagation(); // Prevent triggering document click
     if (audio.paused) {
       audio.play();
       btn.textContent = '🔊 Música';
     } else {
       audio.pause();
-      btn.textContent = '🔈 Música';
+      btn.textContent = '🔈 Música pausada';
     }
   };
 }
-
-// Intentar reproducir la música lo antes posible (al cargar la página)
-window.addEventListener('DOMContentLoaded', () => {
-  playBackgroundMusic();
-});
