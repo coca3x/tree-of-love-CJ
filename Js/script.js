@@ -225,10 +225,10 @@ function playBackgroundMusic() {
   // Try to autoplay immediately
   attemptPlay();
 
-  // Also listen for any user interaction to start playback
-  document.addEventListener('click', attemptPlay, { once: true });
-  document.addEventListener('touchstart', attemptPlay, { once: true });
-  document.addEventListener('keydown', attemptPlay, { once: true });
+  // Use forEach to attach the same event listener to multiple event types
+  ['click', 'touchstart', 'keydown'].forEach(eventType => {
+    document.addEventListener(eventType, attemptPlay, { once: true });
+  });
 
   btn.onclick = (e) => {
     e.stopPropagation(); // Prevent triggering document click
