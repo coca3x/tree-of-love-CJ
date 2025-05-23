@@ -136,7 +136,6 @@ function loadTreeSVG() {
             showDedicationText();
             startFloatingObjects();
             showCountdown();
-            playBackgroundMusic();
           }, 1200);
         }, totalDuration);
       }, 50);
@@ -270,6 +269,7 @@ function playBackgroundMusic() {
     btn = document.createElement('button');
     btn.id = 'music-btn';
     btn.textContent = '🔊 Música';
+    btn.setAttribute('aria-label', 'Toggle background music'); // Added for accessibility
     btn.style.position = 'fixed';
     btn.style.bottom = '18px';
     btn.style.right = '18px';
