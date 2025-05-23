@@ -95,6 +95,66 @@ function initBackgroundMusic() {
   playBackgroundMusic();
 }
 
+// Controla la reproducción de música
+function playBackgroundMusic() {
+  const audio = document.getElementById('bg-music');
+  if (!audio) return;
+
+  let btn = document.getElementById('music-btn');
+  if (!btn) {
+    btn = document.createElement('button');
+    btn.id = 'music-btn';
+    btn.textContent = '🔊 Música';
+    btn.setAttribute('aria-label', 'Controlar música de fondo');
+
+    // Detectar si es móvil para posicionamiento
+    const isMobile = window.innerWidth <= 768;
+
+    btn.style.position = 'fixed';
+    btn.style.top = isMobile ? '15px' : 'auto'; // Si es móvil, arriba
+    btn.style.bottom = isMobile ? 'auto' : '18px'; // Si no es móvil, abajo
+    btn.style.right = '18px';
+    btn.style.zIndex = 999;
+    btn.style.background = 'rgba(80, 80, 80, 0.85)';
+    btn.style.color = 'white';
+    btn.style.border = 'none';
+    btn.style.borderRadius = '24px';
+    btn.style.padding = isMobile ? '8px 12px' : '10px 18px';
+    btn.style.fontSize = isMobile ? '0.9em' : '1.1em';
+    btn.style.cursor = 'pointer';
+    btn.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.3)';
+    document.body.appendChild(btn);
+  }
+
+  const attemptPlay = () => {
+    audio.play().then(() => {
+      btn.textContent = '🔊 Música';
+      document.removeEventListener('click', attemptPlay);
+      document.removeEventListener('touchstart', attemptPlay);
+      document.removeEventListener('keydown', attemptPlay);
+    }).catch(() => {
+      btn.textContent = '▶️ Música';
+    });
+  };
+
+  attemptPlay();
+
+  ['click', 'touchstart', 'keydown'].forEach(eventType => {
+    document.addEventListener(eventType, attemptPlay, { once: true });
+  });
+
+  btn.onclick = (e) => {
+    e.stopPropagation();
+    if (audio.paused) {
+      audio.play();
+      btn.textContent = '🔊 Música';
+    } else {
+      audio.pause();
+      btn.textContent = '🔈 Pausa';
+    }
+  };
+}
+
 // Carga y anima el SVG del árbol
 function loadTreeSVG() {
   fetch('Img/treelove.svg')
@@ -133,6 +193,7 @@ function loadTreeSVG() {
         setTimeout(() => {
           svg.classList.add('move-and-scale');
           setTimeout(() => {
+            // Mostrar texto primero para que aparezca sobre el árbol
             showDedicationText();
             startFloatingObjects();
             showCountdown();
@@ -161,7 +222,7 @@ function getURLParam(name) {
 function showDedicationText() {
   let text = getURLParam('text');
   if (!text) {
-    text = `Para Carolina, el amor de mi vida:\n\nDesde el primer momento supe que era usted. Su sonrisa, su voz, su forma de ser… todo en usted me enamora.\n\nGracias por acompañarme en cada paso, por comprenderme incluso en silencio y por llenar mis días de amor.\n\nLe amo más de lo que las palabras pueden expresar.
+    text = `Para Carolina, el amor de mi vida:\n\nDesde el primer momento supe que era usted. Su sonrisa, su voz, su forma de ser… todo en usted me enamora.\n\nGracias por acompañarme en cada paso, por comprenderme incluso en silencio y por llenar mis días de amor.\n\nLa amo más de lo que las palabras pueden expresar.
 `;
   } else {
     text = decodeURIComponent(text).replace(/\\n/g, '\n');
@@ -257,57 +318,4 @@ function showCountdown() {
   }
   update();
   setInterval(update, 1000);
-}
-
-// Controla la reproducción de música
-function playBackgroundMusic() {
-  const audio = document.getElementById('bg-music');
-  if (!audio) return;
-
-  let btn = document.getElementById('music-btn');
-  if (!btn) {
-    btn = document.createElement('button');
-    btn.id = 'music-btn';
-    btn.textContent = '🔊 Música';
-    btn.setAttribute('aria-label', 'Toggle background music'); // Added for accessibility
-    btn.style.position = 'fixed';
-    btn.style.bottom = '18px';
-    btn.style.right = '18px';
-    btn.style.zIndex = 99;
-    btn.style.background = 'rgba(255,255,255,0.85)';
-    btn.style.border = 'none';
-    btn.style.borderRadius = '24px';
-    btn.style.padding = '10px 18px';
-    btn.style.fontSize = '1.1em';
-    btn.style.cursor = 'pointer';
-    document.body.appendChild(btn);
-  }
-
-  const attemptPlay = () => {
-    audio.play().then(() => {
-      btn.textContent = '🔊 Música';
-      document.removeEventListener('click', attemptPlay);
-      document.removeEventListener('touchstart', attemptPlay);
-      document.removeEventListener('keydown', attemptPlay);
-    }).catch(() => {
-      btn.textContent = '▶️ Música';
-    });
-  };
-
-  attemptPlay();
-
-  ['click', 'touchstart', 'keydown'].forEach(eventType => {
-    document.addEventListener(eventType, attemptPlay, { once: true });
-  });
-
-  btn.onclick = (e) => {
-    e.stopPropagation();
-    if (audio.paused) {
-      audio.play();
-      btn.textContent = '🔊 Música';
-    } else {
-      audio.pause();
-      btn.textContent = '🔈 Música pausada';
-    }
-  };
 }
