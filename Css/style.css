@@ -8,39 +8,6 @@ body {
   /* Changed from #fcfcfc to black */
 }
 
-#fireworks-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  display: block;
-  z-index: 1;
-  pointer-events: none;
-}
-
-#center-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 5rem;
-  color: #e60026;
-  font-family: 'Arial Black', Arial, sans-serif;
-  text-shadow: 2px 2px 8px #ffb3b3;
-  z-index: 2;
-  letter-spacing: 0.5rem;
-  user-select: none;
-  display: flex;
-  gap: 0.5rem;
-  pointer-events: none;
-}
-
-.letter {
-  opacity: 0;
-  transition: opacity 0.5s;
-}
-
 /* Estilos para la animación inicial del nombre */
 .name-intro {
   position: fixed;
@@ -77,24 +44,22 @@ body {
 }
 
 .name-text-intro {
-  font-family: 'Pacifico', 'Dancing Script', cursive, sans-serif;
-  /* Tamaño de fuente más cercano al final para evitar cambios bruscos */
-  font-size: 4.5rem;
+  font-family: 'Great Vibes', cursive;
+  font-size: 5.5rem;
   color: transparent;
-  background: linear-gradient(90deg, #ff5e62, #ff9966, #fc6f58, #c1321f, #ff5e62);
-  background-size: 400% 400%;
+  background: linear-gradient(90deg, #ff9999, #ff5e62, #ff9966, #fc6f58);
+  background-size: 300% 300%;
   -webkit-background-clip: text;
   background-clip: text;
-  text-shadow: 0 0 20px rgba(255, 94, 98, 0.5);
+  text-shadow: 0 0 25px rgba(255, 94, 98, 0.6);
   animation: nameGradient 6s ease infinite, nameAppear 1.2s ease-out forwards;
   opacity: 0;
   transform: scale(0.9);
-  letter-spacing: 0.05em;
-  /* Evitar cambios de tamaño causados por margen/padding */
+  letter-spacing: 0.02em;
   margin: 0;
   padding: 0;
-  /* Mantener el texto dentro del contenedor */
   white-space: nowrap;
+  font-weight: 400;
 }
 
 /* Actualizar animación para que sea más suave */
@@ -142,20 +107,20 @@ body {
 }
 
 .name-text {
-  font-family: 'Pacifico', 'Dancing Script', cursive, sans-serif;
-  /* Ajustado para ser más consistente con la intro */
-  font-size: 3.5rem;
+  font-family: 'Great Vibes', cursive;
+  font-size: 4rem;
   color: transparent;
-  background: linear-gradient(90deg, #ff5e62, #ff9966, #fc6f58, #c1321f, #ff5e62);
-  background-size: 400% 400%;
+  background: linear-gradient(90deg, #ff9999, #ff5e62, #ff9966, #fc6f58);
+  background-size: 300% 300%;
   -webkit-background-clip: text;
   background-clip: text;
   text-shadow: 0 0 20px rgba(255, 94, 98, 0.5);
   animation: nameGradient 6s ease infinite;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.02em;
   margin: 0;
   padding: 0;
   white-space: nowrap;
+  font-weight: 400;
 }
 
 .name-hearts {

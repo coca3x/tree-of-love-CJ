@@ -162,7 +162,7 @@ function getURLParam(name) {
 function showDedicationText() {
   let text = getURLParam('text');
   if (!text) {
-    text = `Para Carolina, el amor de mi vida:\n\nDesde el primer momento supe que era usted. Su sonrisa, su voz, su forma de ser… todo de usted me enamora.\n\nGracias por acompañarme en cada paso, por comprenderme incluso en silencio y por llenar mis días de amor.\n\nLe amo más de lo que las palabras pueden expresar.
+    text = `Para Carolina, el amor de mi vida:\n\nDesde el primer momento supe que era usted. Su sonrisa, su voz, su forma de ser… todo en usted me enamora.\n\nGracias por acompañarme en cada paso, por comprenderme incluso en silencio y por llenar mis días de amor.\n\nLe amo más de lo que las palabras pueden expresar.
 `;
   } else {
     text = decodeURIComponent(text).replace(/\\n/g, '\n');
@@ -228,13 +228,18 @@ function startFloatingObjects() {
   spawn();
 }
 
+const config = {
+  defaultStartDate: '2024-12-03',
+  defaultEventDate: '2025-06-03'
+};
+
 // Muestra y actualiza la cuenta regresiva
 function showCountdown() {
   const container = document.getElementById('countdown');
   let startParam = getURLParam('start');
   let eventParam = getURLParam('event');
-  let startDate = startParam ? new Date(startParam + 'T00:00:00') : new Date('2024-12-03T00:00:00');
-  let eventDate = eventParam ? new Date(eventParam + 'T00:00:00') : new Date('2025-06-03T00:00:00');
+  let startDate = startParam ? new Date(startParam + 'T00:00:00') : new Date(config.defaultStartDate + 'T00:00:00');
+  let eventDate = eventParam ? new Date(eventParam + 'T00:00:00') : new Date(config.defaultEventDate + 'T00:00:00');
 
   function update() {
     const now = new Date();
