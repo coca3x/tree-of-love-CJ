@@ -4,15 +4,34 @@ body {
   font-size: 16px;
 }
 
+.name-intro.move-to-header {
+  transform: translateY(-45vh);
+}
+
+.name-text-intro {
+  font-size: 3.5rem;
+}
+
+.main-header {
+  height: 80px;
+  top: 15px;
+}
+
+.name-text {
+  font-size: 2.8rem;
+}
+
+/* Ajustes para el árbol */
 .tree-container {
   width: 92vw !important;
   height: 62vw !important;
   max-width: 98vw;
-  max-height: 80vw;
+  max-height: 70vw;
   min-width: 180px;
   min-height: 180px;
   position: absolute;
-  top: 48%;
+  top: 55%;
+  /* Moved down a bit */
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
@@ -26,17 +45,23 @@ body {
 
 .tree-container svg.move-and-scale {
   transition: transform 1.2s cubic-bezier(.77, 0, .18, 1);
-  /* Mueve hacia abajo en caso de los celulares */
-  transform: translateY(60px) scale(1.18);
+  /* Ajuste para móviles */
+  transform: translateY(10px) scale(1.1);
 }
 
+/* Ajustes para el texto de dedicatoria */
 .dedication-text {
   position: absolute;
-  top: 7vw;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
-  max-width: 92vw;
+  transform: translate(-50%, -50%);
+  width: 85vw;
+  max-width: 85vw;
+  min-width: 0;
   font-size: 1.05rem;
+  padding: 0.8em;
+  margin-top: -15vh;
+  /* Position higher on the screen */
   text-align: center;
   color: #000000;
   font-family: 'Courier New', Courier, monospace;
@@ -46,10 +71,11 @@ body {
   pointer-events: none;
 }
 
+/* Ajustes para la firma */
 .signature {
   position: static;
   display: block;
-  margin: 2.2em auto 0 auto;
+  margin: 1.2em auto 0 auto;
   left: auto;
   bottom: auto;
   transform: none;
@@ -67,7 +93,7 @@ body {
   .signature {
     position: static;
     display: block;
-    margin: 2.2em auto 0 auto;
+    margin: 1.2em auto 0 auto;
     left: auto;
     bottom: auto;
     transform: none;
@@ -76,18 +102,20 @@ body {
   }
 }
 
+/* Ajustes para la cuenta regresiva */
 .countdown {
   position: fixed;
   left: 50%;
-  bottom: 10vw;
+  bottom: 5vh;
   transform: translateX(-50%);
-  font-size: 0.98rem;
-  min-width: 60vw;
-  max-width: 92vw;
+  font-size: 1rem;
+  min-width: 80vw;
+  max-width: 85vw;
   text-align: center;
-  padding: 0.5em 0.7em;
+  padding: 0.5em;
   border-radius: 1em;
-  background: #fff8;
+  background: rgba(60, 60, 60, 0.85);
+  /* Darker background for better visibility */
   box-shadow: 0 2px 8px #e6002611;
   z-index: 6;
   pointer-events: none;
@@ -104,6 +132,27 @@ body {
 
 /* Ajusta los pétalos flotantes */
 .floating-petal {
-  width: 13px;
-  height: 18px;
+  width: 12px;
+  height: 16px;
+}
+
+/* Para pantallas muy pequeñas */
+@media (max-height: 600px) {
+  .name-text-intro {
+    font-size: 3rem;
+  }
+
+  .name-text {
+    font-size: 2.5rem;
+  }
+
+  .dedication-text {
+    font-size: 0.95rem;
+    margin-top: -10vh;
+  }
+
+  .countdown {
+    font-size: 0.9rem;
+    bottom: 2vh;
+  }
 }
