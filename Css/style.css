@@ -1,0 +1,353 @@
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #000000;
+  /* Changed from #fcfcfc to black */
+}
+
+/* Estilos para la animación inicial del nombre */
+.name-intro {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 1;
+  /* Transición más directa y suave */
+  transition: transform 1.8s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.8s ease-out;
+}
+
+.name-intro.move-to-header {
+  /* Ajustado para posición más estética */
+  transform: translateY(-38vh);
+  /* Cambiado de -42vh a -38vh para que termine más abajo */
+}
+
+.name-intro.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.name-container-intro {
+  position: relative;
+  text-align: center;
+  /* Evitar cambios de tamaño durante la transición */
+  width: auto;
+  height: auto;
+}
+
+.name-text-intro {
+  font-family: 'Great Vibes', cursive;
+  font-size: 5.5rem;
+  color: transparent;
+  background: linear-gradient(90deg, #ff9999, #ff5e62, #ff9966, #fc6f58);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  text-shadow: 0 0 25px rgba(255, 94, 98, 0.6);
+  animation: nameGradient 6s ease infinite, nameAppear 1.2s ease-out forwards;
+  opacity: 0;
+  transform: scale(0.9);
+  letter-spacing: 0.02em;
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
+  font-weight: 400;
+}
+
+/* Actualizar animación para que sea más suave */
+@keyframes nameAppear {
+  0% {
+    opacity: 0;
+    transform: scale(0.7) translateY(30px);
+  }
+
+  60% {
+    opacity: 0.9;
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Estilos para el encabezado con el nombre (inicialmente oculto) */
+.main-header {
+  position: fixed;
+  top: 30px;
+  /* Cambiado de 0 a 30px para bajar la posición */
+  left: 0;
+  width: 100%;
+  height: 100px;
+  /* Ajustado para mayor consistencia */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  padding: 10px 0;
+  opacity: 0;
+  transition: opacity 0.5s ease-in;
+}
+
+.main-header.visible {
+  opacity: 1;
+}
+
+/* Estilos para el encabezado con el nombre */
+.name-container {
+  position: relative;
+  text-align: center;
+}
+
+.name-text {
+  font-family: 'Great Vibes', cursive;
+  font-size: 4rem;
+  color: transparent;
+  background: linear-gradient(90deg, #ff9999, #ff5e62, #ff9966, #fc6f58);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  text-shadow: 0 0 20px rgba(255, 94, 98, 0.5);
+  animation: nameGradient 6s ease infinite;
+  letter-spacing: 0.02em;
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
+  font-weight: 400;
+}
+
+.name-hearts {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+@keyframes nameGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes floatHeart {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: translateY(-80px) rotate(20deg);
+    opacity: 0;
+  }
+}
+
+/* Ajuste para el contenido principal para que no quede debajo del título */
+.tree-container {
+  /* Asegura que el contenedor tenga el nuevo tamaño */
+  width: 520px !important;
+  height: 520px !important;
+  /* Centrado absoluto */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  margin-top: 40px;
+  /* Aumentado de 20px a 40px para dar más espacio entre el header y el árbol */
+  /* Añadir margen para ajustar por el header */
+}
+
+.tree-container svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.tree-container svg path {
+  transition: fill-opacity 0.5s, stroke-dashoffset 1.2s;
+}
+
+.tree-container svg.move-and-scale {
+  transition: transform 1.2s cubic-bezier(.77, 0, .18, 1);
+  transform: translateX(200px) scale(1.35);
+}
+
+.dedication-text {
+  position: absolute;
+  top: 50%;
+  left: 3%;
+  right: auto;
+  transform: translateY(-50%);
+  min-width: 320px;
+  max-width: 600px;
+  width: 60rem;
+  font-size: 1.5rem;
+  color: #ffffff;
+  /* Changed from #050505 (almost black) to white for better contrast */
+  font-family: 'Courier New', Courier, monospace;
+  white-space: pre-line;
+  z-index: 3;
+  opacity: 0;
+  pointer-events: none;
+  max-height: 90vh;
+  overflow: visible;
+  padding: 1em 1.5em 1em 1em;
+  background: rgba(60, 60, 60, 0.75);
+  /* Darker, more opaque background */
+  backdrop-filter: blur(3px);
+  /* Increased blur for better contrast */
+  -webkit-backdrop-filter: blur(3px);
+  border-radius: 0.7em;
+  box-shadow: 0 3px 15px rgba(255, 100, 100, 0.15);
+  /* Brighter, more visible shadow */
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+  /* Add text shadow for better readability */
+  transition: max-width 0.4s, min-width 0.4s, width 0.4s;
+}
+
+.dedication-text.typing {
+  opacity: 1;
+  animation: fadeInText 0.6s;
+}
+
+@keyframes fadeInText {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+#floating-objects {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.floating-petal {
+  position: absolute;
+  will-change: transform, opacity;
+  opacity: 0.85;
+  pointer-events: none;
+  width: 24px;
+  height: 32px;
+  background: radial-gradient(ellipse at 60% 30%, #ffd6e0 60%, #ff69b4 100%);
+  border-radius: 60% 40% 60% 40% / 60% 60% 40% 40%;
+}
+
+.signature {
+  /* Cambia posición absoluta a relativa y pon margen arriba */
+  position: relative;
+  top: auto;
+  left: auto;
+  bottom: auto;
+  margin-top: 1.5em;
+  margin-left: 0;
+  display: block;
+  font-family: 'Dancing Script', 'Pacifico', cursive, sans-serif;
+  font-size: 1.2rem;
+  color: #ffffff;
+  /* Changed from #000000 to white */
+  opacity: 0;
+  z-index: 5;
+  white-space: pre;
+  pointer-events: none;
+  transition: opacity 0.7s;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+  /* Add text shadow for readability */
+}
+
+.signature.visible {
+  opacity: 1;
+  animation: signature-draw 2.2s steps(24) forwards;
+}
+
+@keyframes signature-draw {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.countdown {
+  position: fixed;
+  left: 50%;
+  bottom: 3%;
+  transform: translateX(-50%);
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.6rem;
+  color: #ffffff;
+  /* Changed from #333 to white */
+  background: rgba(60, 60, 60, 0.75);
+  /* Darker, more consistent background */
+  padding: 0.4em 1em;
+  border-radius: 1em;
+  z-index: 6;
+  box-shadow: 0 3px 15px rgba(255, 100, 100, 0.15);
+  /* Brighter shadow */
+  pointer-events: none;
+  letter-spacing: 0.05em;
+  min-width: 220px;
+  text-align: center;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+  /* Add text shadow for better readability */
+  transition: opacity 0.8s cubic-bezier(.77, 0, .18, 1), transform 0.8s cubic-bezier(.77, 0, .18, 1);
+  opacity: 0;
+  transform: translateX(-50%) translateY(30px);
+}
+
+.countdown.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Responsivo para móviles: la caja ocupa casi todo el ancho arriba del árbol */
+@media (max-width: 700px) {
+  .dedication-text {
+    left: 50%;
+    right: auto;
+    top: 8%;
+    transform: translateX(-50%) translateY(0);
+    min-width: 0;
+    max-width: 95vw;
+    width: 95vw;
+    font-size: 1.1rem;
+    padding: 0.7em 0.7em 0.7em 0.7em;
+  }
+
+  .signature {
+    font-size: 1.3rem;
+  }
+}
